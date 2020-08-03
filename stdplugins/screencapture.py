@@ -9,7 +9,7 @@ from telethon import events
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="screencapture (.*)"))
+@borg.on(admin_cmd(pattern="screencapture (.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -46,7 +46,7 @@ async def _(event):
         if event.reply_to_msg_id:
             message_id = event.reply_to_msg_id
         with io.BytesIO(im_png) as out_file:
-            out_file.name = "@UniBorg.ScreenCapture.PNG"
+            out_file.name = "ScreenCapture.PNG"
             await borg.send_file(
                 event.chat_id,
                 out_file,
